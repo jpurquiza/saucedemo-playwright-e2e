@@ -13,15 +13,15 @@ permissions:
 jobs:
   test:
     timeout-minutes: 15
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     env:
       STANDARD_USERNAME: ${{ vars.STANDARD_USERNAME }}
       LOCKED_USERNAME: ${{ vars.LOCKED_USERNAME }}
       PASSWORD: ${{ secrets.SAUCE_PASSWORD }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
           node-version: 24
 
@@ -34,9 +34,10 @@ jobs:
       - name: Run Playwright tests
         run: npm test
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v6
         if: ${{ !cancelled() }}
         with:
           name: playwright-report
           path: playwright-report/
           retention-days: 30
+          

@@ -19,10 +19,6 @@ export class LoginPage {
     await this.page.goto('/');
   }
 
-  async gotoInventory(): Promise<void> {
-    await this.page.goto('/inventory.html');
-  }
-
   async login(username: string, password: string): Promise<void> {
     await this.usernameInput.fill(username);
     await this.passwordInput.fill(password);

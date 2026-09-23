@@ -7,6 +7,7 @@
     "test": "playwright test",
     "test:login": "playwright test tests/login.spec.ts",
     "test:cart": "playwright test tests/cart.spec.ts",
+    "test:checkout": "playwright test tests/checkout.spec.ts",
     "test:ui": "playwright test --ui",
     "test:headed": "playwright test --headed --workers=1",
     "test:list": "playwright test --list",

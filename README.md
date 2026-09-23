@@ -13,46 +13,30 @@ End-to-end test automation framework for [SauceDemo](https://www.saucedemo.com/)
 
 ## Test Coverage
 
-Login (`tests/login.spec.ts`):
+Full scenario list in [`docs/test-coverage.md`](docs/test-coverage.md).
 
-- Login with valid credentials
-- Locked out user cannot log in
-- Invalid credentials
-- Missing username
-- Missing password
-- Unauthenticated access to the inventory page is blocked
-- Inventory page is not accessible after logging out
 
 ## Tech Stack
 
-Playwright · TypeScript · GitHub Actions
+Playwright · TypeScript · Node.js · GitHub Actions
 
 ## Getting Started
 
 ### Prerequisites
 
-- Node.js LTS
+- Node.js 24 (LTS)
 - npm
 
 ### Installation
 
-Install the project dependencies:
-
 ```bash
 npm install
-```
-
-Install the Chromium browser used by the test suite:
-
-```bash
 npx playwright install chromium
 ```
 
 On Linux, if the browser fails to start because of missing system libraries, use `npx playwright install --with-deps chromium` instead.
 
 ### Environment Variables
-
-Create a local `.env` file from the example:
 
 ```bash
 cp .env.example .env
@@ -70,40 +54,34 @@ All variables are required. Playwright stops before running any test and reports
 
 ## Running Tests
 
-| Command               | Description                                           |
-| --------------------- | ----------------------------------------------------- |
-| `npm test`            | Run the complete test suite                           |
-| `npm run test:login`  | Run the login tests only                              |
-| `npm run test:headed` | Run tests with a visible browser                      |
-| `npm run test:ui`     | Open Playwright UI mode                               |
-| `npm run test:list`   | List discovered tests without running them            |
-| `npm run report`      | Open the HTML report of the last run                  |
-| `npm run typecheck`   | Check TypeScript types without running tests          |
+```bash
+npm run test
+```
+
+Opens the HTML report of the last run:
+
+```bash
+npm run report
+```
+
+More commands (running a single suite, headed mode, UI mode, type checking) are in `package.json`.
 
 ## Project Structure
 
 ```text
 saucedemo-playwright-e2e/
-├── .github/
-│   └── workflows/
-│       └── playwright.yml    # CI pipeline (GitHub Actions)
-├── config/
-│   └── env.ts                # Environment variable loading and validation
-├── pages/                    # Page Object Model classes
-│   ├── inventory.page.ts
-│   └── login.page.ts
-├── tests/                    # Test specifications
-│   └── login.spec.ts
-├── .env.example              # Environment variable template
-├── package.json
-└── playwright.config.ts      # Playwright configuration
+├── .github/workflows/playwright.yml   # CI pipeline (GitHub Actions)
+├── config/env.ts                      # Environment variable loading and validation
+├── docs/                              # Test coverage
+├── pages/                             # Page Object Model classes
+├── tests/                             # Test specifications
+├── .env.example                       # Environment variable template
+└── playwright.config.ts               # Playwright configuration
 ```
 
 ## Continuous Integration
 
-The workflow in `.github/workflows/playwright.yml` runs on every push and pull request to `main`, and it can also be started manually from the Actions tab. It installs the dependencies and Chromium, runs the suite, and uploads the HTML report as an artifact that is kept for 30 days.
-
-To run it on your own fork, add the following in **Settings → Secrets and variables → Actions**:
+Runs on every push and pull request to `main`, and can also be started manually from the Actions tab. To run it on your own fork, add the following in **Settings → Secrets and variables → Actions**:
 
 | Type     | Name                |
 | -------- | ------------------- |
